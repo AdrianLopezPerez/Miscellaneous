@@ -1,0 +1,7 @@
+#include <iostream>
+#include <limits>
+
+inline void pause() {    
+	std::cout << "\n Press ENTER to continue...";
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+} 
