@@ -1,0 +1,21 @@
+#include <iostream>
+#include <limits>
+
+inline bool float_input_validation() {
+	if (std::cin.fail() || std::cin.get() != '\n') {
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "\n ERROR: The value is not a real number."
+				      << "\n\n Write a real number and press ENTER: ";
+		return false;
+	}
+	else return true;
+}
+
+// Example of user input
+
+float x; // (or double, or long double)
+std::cout << "\n Enter the value of x: ";
+do {
+  std::cin >> x;
+} while(float_input_validation());
