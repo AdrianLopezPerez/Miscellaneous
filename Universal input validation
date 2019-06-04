@@ -1,0 +1,16 @@
+#include <iostream>
+#include <limits>
+
+type x;
+while (1) { 
+      std::cin >> x;
+			if (std::cin.fail() || std::cin.get() != '\n') {
+			  std::cin.clear();  
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << "\n ERROR: Invalid input.\n\n Write a [type] and press ENTER: ";
+			}
+			else if (X_IS_NOT_WITHIN_THE_SET_OF_VALID_VALUES) {	
+				std::cout << "\n ERROR: Invalid input.\n\n Write a [type] and press ENTER: ";
+			}
+			else break;
+}
