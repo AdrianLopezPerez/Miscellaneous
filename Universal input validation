@@ -1,16 +1,23 @@
 #include <iostream>
 #include <limits>
 
-type x;
-while (1) { 
-      std::cin >> x;
-			if (std::cin.fail() || std::cin.get() != '\n') {
-			  std::cin.clear();  
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << "\n ERROR: Invalid input.\n\n Write a [type] and press ENTER: ";
-			}
-			else if (X_IS_NOT_WITHIN_THE_SET_OF_VALID_VALUES) {	
-				std::cout << "\n ERROR: Invalid input.\n\n Write a [type] and press ENTER: ";
-			}
-			else break;
+// The first argument is the variable in which the input is
+// to be stored. The second argument is the conditions that
+// must be met in order to be valid (a bool statement).
+// If there are not particular conditions that must be met,
+// use TRUE as a second argument. Do not ever use FALSE.
+
+// Ex: double x, input_validation(x , x != 0 && x < 8.3);
+
+template<class TYPE>
+void input_validation(TYPE input, bool conditions) {
+	while (1) { 
+		std::cin >> input;
+		if (std::cin.fail() || std::cin.get() != '\n' || !conditions) {
+			std::cin.clear();  
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
+		}
+		else break;
+	}
 }
