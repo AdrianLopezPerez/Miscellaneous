@@ -28,6 +28,7 @@
 // auto x_validity = [](auto foo) { return foo != 0; };
 // input_validation(x, x_validity, "Enter x: ");
 
+// CODE
 #include <iostream>
 #include <limits>
 template<class TYPE, class LAMBDA>
