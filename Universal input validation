@@ -32,8 +32,8 @@
 #include <limits>
 template<class TYPE, class LAMBDA>
 void input_validation(TYPE input, LAMBDA conditions) {
-    while (1) {
-        std::cin >> input;
+    while (1) { // Don't put std::cin as a condition.
+        std::cin >> input; 
         if (std::cin.fail() || std::cin.get() != '\n') {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -46,14 +46,6 @@ void input_validation(TYPE input, LAMBDA conditions) {
     }
 }
 
-int main() {
-    unsigned short x = 0;
-    auto x_validity = [](auto foo) { return true; };
-    std::cout << "Enter input: ";
-    input_validation(x, x_validity);
-    return 0;
-}
-
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
-//       cin stores the unsigned number entered.
+//       std::cin stores the unsigned number entered.
