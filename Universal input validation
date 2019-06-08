@@ -1,26 +1,50 @@
+// OBJECTIVE
+// This function demands user input and validates it. 
+// The aim is to make code within the body of our program
+// as clean as possible.
+
+// ARGUMENTS
+// The first argument is the variable in which the input is
+// to be stored. The second argument is a the name of a 
+// lambda function of the form 
+//        auto conditions = [](auto foo) { return foo != 0; };
+// where foo != 0 is a sample statement.
+// If there are not particular conditions that must be met,
+// there is no need to declare the lambda function. Just use
+// true as a second argument and do not ever use false.
+
+// USE
+// Everytime user input is required, follow these steps:
+// 1. Declare and initialize the variable. Initialization is required!
+// 2. Declare an auto lambda function that returns true if conditions are met.
+// 3. Call input_validation(variable, conditions).
+// Observe that this way we can get and validate user input with, at most, 
+// three lines of code (for simple lambda functions).
+// Remember to use true as a second argument if there are no specific conditions
+// to be met.
+
+// EXAMPLE
+// double x = 0;
+// auto x_validity = [](auto foo) { return foo != 0; };
+// input_validation(x, x_validity);
+
 #include <iostream>
 #include <limits>
-
-// The first argument is the variable in which the input is
-// to be stored. The second argument is a bool function
-// which returns true only if the conditions are met.
-// If there are not particular conditions that must be met,
-// use true as a second argument. Do not ever use false.
-
-// Ex: double x, input_validation(x , x != 0 && x < 8.3);
-
-template<class TYPE>
-void input_validation(TYPE input, bool conditions) {
-	while (1) { 
-		std::cin >> input;
-		if (std::cin.fail() || std::cin.get() != '\n') {
-			std::cin.clear();  
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
-		}
-		else if (!conditions) {
-			std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
-		}
-		else break;
-	}
+template<class TYPE, class LAMBDA>
+void input_validation(TYPE variable, LAMBDA conditions) {
+    while (std::cin >> variable) {
+        if (std::cin.fail() || std::cin.get() != '\n') {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
+        }
+        else if (!conditions(variable)) {
+            std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
+        }
+        else break;
+    }
 }
+
+// KNOWN BUGS
+//    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
+//       cin stores the unsigned number entered.
