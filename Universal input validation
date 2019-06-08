@@ -18,9 +18,9 @@
 // 2. Declare an auto lambda function that returns true if conditions are met.
 // 3. Provide UI with std::cout.
 // 4. Call input_validation(variable, conditions).
-// Observe that this way we can get and validate user input with at most 
-// four lines of code. Remember to make the lambda return true if no conditions
-// are specified.
+// Observe that this way we can get and validate anytime any kind of user input
+// with, at most, four lines of code. Remember to make the lambda return true 
+// if no conditions have to be fulfilled.
 
 // EXAMPLE
 // double x = 0;
