@@ -26,7 +26,6 @@
 // EXAMPLE
 // double x = 0;
 // auto x_validity = [](auto foo) { return foo != 0; };
-// std::cout << "Enter input: ";
 // input_validation(x, x_validity, "Enter x: ");
 
 #include <iostream>
@@ -46,13 +45,6 @@ void input_validation(TYPE input, LAMBDA conditions, std::string message) {
         }
         else break;
     }
-}
-
-int main() {
-    unsigned short x = 0;
-    auto x_validity = [](auto foo) { return foo==0; };
-    input_validation(x, x_validity, " Enter input: ");
-    return 0;
 }
 
 // KNOWN BUGS
