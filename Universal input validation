@@ -32,7 +32,7 @@
 #include <limits>
 template<class TYPE, class LAMBDA>
 void input_validation(TYPE input, LAMBDA conditions) {
-    while (1) { // Don't put std::cin as a condition.
+    while (1) { // Don't put std::cin as a condition. It results in bad behaviour.
         std::cin >> input; 
         if (std::cin.fail() || std::cin.get() != '\n') {
             std::cin.clear();
