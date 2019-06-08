@@ -48,6 +48,13 @@ void input_validation(TYPE input, LAMBDA conditions, std::string message) {
     }
 }
 
+int main() {
+    unsigned short x = 0;
+    auto x_validity = [](auto foo) { return foo==0; };
+    input_validation(x, x_validity, " Enter input: ");
+    return 0;
+}
+
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
 //       cin stores the unsigned number entered.
