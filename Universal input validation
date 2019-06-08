@@ -11,41 +11,50 @@
 // where foo != 0 is a sample statement.
 // If there are not particular conditions that must be met,
 // make the lambda function return true.
+// The third argument is the string that contains the message
+// sent to the user, which in general is "Enter x: ".
 
 // USE
 // Everytime user input is required, follow these steps:
 // 1. Declare and initialize the variable. Initialization is required!
 // 2. Declare an auto lambda function that returns true if conditions are met.
-// 3. Provide UI with std::cout.
-// 4. Call input_validation(variable, conditions).
-// Observe that this way we can get and validate anytime any kind of user input
-// with, at most, four lines of code. Remember to make the lambda return true 
-// if no conditions have to be fulfilled.
+// 3. Call input_validation(variable, conditions, message).
+// Observe that this way we can get and validate user input with at most 
+// three lines of code. Remember to make the lambda return true if no conditions
+// are specified.
 
 // EXAMPLE
 // double x = 0;
 // auto x_validity = [](auto foo) { return foo != 0; };
 // std::cout << "Enter input: ";
-// input_validation(x, x_validity);
+// input_validation(x, x_validity, "Enter x: ");
 
 #include <iostream>
 #include <limits>
 template<class TYPE, class LAMBDA>
-void input_validation(TYPE input, LAMBDA conditions) {
-    while (1) { // Don't put std::cin>>input as a condition. It results in bad behaviour.
-        std::cin >> input; 
+void input_validation(TYPE input, LAMBDA conditions, std::string message) {
+    while (1) {
+        std::cout << message;
+        std::cin >> input;
         if (std::cin.fail() || std::cin.get() != '\n') {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
+            std::cout << " ERROR: Invalid input.\n\n";
         }
         else if (!conditions(input)) {
-            std::cout << "\n ERROR: Invalid input. Try again and press ENTER: ";
+            std::cout << " ERROR: Invalid value.\n\n";
         }
         else break;
     }
 }
 
+int main() {
+    unsigned short x = 0;
+    auto x_validity = [](auto foo) { return foo==0; };
+    input_validation(x, x_validity, " Enter input: ");
+    return 0;
+}
+
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
-//       std::cin stores the unsigned number entered.
+//       cin stores the unsigned number entered.
