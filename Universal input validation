@@ -1,3 +1,5 @@
+// Requires compiler flag -std=c++1y.
+
 // OBJECTIVE
 // This function demands user input and validates it. 
 // The aim is to make code within the body of our program
