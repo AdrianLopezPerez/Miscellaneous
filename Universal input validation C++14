@@ -19,8 +19,8 @@
 // 1. Declare and initialize the variable. Initialization is required!
 // 2. Declare an auto lambda function that returns true if conditions are met.
 // 3. Call input_validation(variable, conditions, message).
-// Observe that this way we can get and validate user input with at most 
-// three lines of code. Remember to make the lambda return true if no conditions
+// Observe that this way we can get and validate user input with, at most,
+//lines of code. Remember to make the lambda return true if no conditions
 // are specified.
 
 // EXAMPLE
