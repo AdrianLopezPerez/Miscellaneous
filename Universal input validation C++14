@@ -31,6 +31,7 @@
 // CODE
 #include <iostream>
 #include <limits>
+
 template<class TYPE, class LAMBDA>
 void input_validation(TYPE input, LAMBDA conditions, std::string message) {
     while (1) {
