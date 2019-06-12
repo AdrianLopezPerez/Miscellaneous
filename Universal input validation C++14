@@ -55,4 +55,4 @@ void input_validation(TYPE input, LAMBDA conditions, std::string message) {
 #endif
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
-//       cin stores the unsigned number entered.
+//       (e.g. -123456789) cin stores the unsigned number entered (123456789).
