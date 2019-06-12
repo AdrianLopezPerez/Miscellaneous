@@ -29,6 +29,9 @@
 // input_validation(x, x_validity, "Enter x: ");
 
 // CODE
+#ifndef __INPUT_VALIDATION_H
+#define __INPUT_VALIDATION_H
+
 #include <iostream>
 #include <limits>
 
@@ -40,15 +43,16 @@ void input_validation(TYPE input, LAMBDA conditions, std::string message) {
         if (std::cin.fail() || std::cin.get() != '\n') {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << " ERROR: Invalid input.\n\n";
+            std::cout << " ERROR:Invalid input.\n\n";
         }
         else if (!conditions(input)) {
-            std::cout << " ERROR: Invalid value.\n\n";
+            std::cout << " ERROR:Invalid value.\n\n";
         }
         else break;
     }
 }
 
+#endif
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
 //       cin stores the unsigned number entered.
