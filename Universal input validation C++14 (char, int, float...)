@@ -1,53 +1,54 @@
 // OBJECTIVE
 // This function demands user input and validates it. 
 // The aim is to make code within the body of our program
-// as clean as possible. Aimed to work with simple types  
-// such as char, std::string, int, float and double, including
-// signed and unsigned types.
+// as clean as possible.
 
 // ARGUMENTS
-// The first argument is the variable in which the input is
-// to be stored. The second argument is a the name of a 
-// lambda function of the form 
+// 1. The first argument is a pointer to the variable in which 
+// the input is to be stored. 
+// 2. The second argument is the name of a lambda function like
 //        auto conditions = [](auto foo) { return foo != 0; };
 // where foo != 0 is a sample statement.
 // If there are not particular conditions that must be met,
 // make the lambda function return true.
-// The third argument is the string that contains the message
-// sent to the user, which in general is "Enter x: ".
+// 3. The third argument is the string that contains the message
+// sent to the user, e.g. "Enter x: ".
 
 // USE
 // Everytime user input is required, follow these steps:
-// 1. Declare and initialize the variable. Initialization is required!
-// 2. Declare an auto lambda function that returns true if conditions are met.
-// 3. Call input_validation(variable, conditions, message).
-// Observe that this way we can get and validate user input with, at most,
-// three lines of code. Remember to make the lambda return true 
-// if no conditions are to be satisfied. Never inline this function.
+// 1. Declare the variable.
+// 2. Declare an auto lambda function that returns true if conditions 
+//    are met, or make it return true if there are no conditions.
+// 3. Call input_validation(&variable, conditions, message).
+// Observe that, using this style, it takes at least t+l+n lines of code
+// to get and validate user input, where t is the number of diferent types
+// of the variables, l is the number of different lambda functions, and 
+// n is the number of inputs. 
+
 
 // EXAMPLE
-// double x = 0;
+// double x;
 // auto x_validity = [](auto foo) { return foo != 0; };
-// input_validation(x, x_validity, "Enter x: ");
+// input_validation(&x, x_validity, "Enter x: ");
 
 // CODE
-#ifndef __INPUT_VALIDATION_H
+#ifndef __INPUT_VALIDATION_H // Header guards
 #define __INPUT_VALIDATION_H
 
 #include <iostream>
 #include <limits>
 
-template<class TYPE, class LAMBDA>
+template<class TYPE, class LAMBDA> // Generic types (TYPE is a pointer and LAMBDA is a lambda function)
 void input_validation(TYPE input, LAMBDA conditions, std::string message) {
     while (1) {
-        std::cout << message;
-        std::cin >> input;
-        if (std::cin.fail() || std::cin.get() != '\n') {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << " ERROR:Invalid input.\n\n";
+        std::cout << message; // Print a string (UI)
+        std::cin >> *input;   // Asign user input to the value of the given pointer
+        if (std::cin.fail() || std::cin.get() != '\n') { // If input is invalid (has another type than requested)
+            std::cin.clear(); // Clean the flag of cin.fail
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Erase spurious chars
+            std::cout << " ERROR:Invalid input.\n\n"; 
         }
-        else if (!conditions(input)) {
+        else if (!conditions(*input)) { // If conditions for validity are not met
             std::cout << " ERROR:Invalid value.\n\n";
         }
         else break;
@@ -57,4 +58,4 @@ void input_validation(TYPE input, LAMBDA conditions, std::string message) {
 #endif
 // KNOWN BUGS
 //    -- If the variable is unsigned and the user input is a minus sign with a few numbers,
-//       (e.g. -123456789) cin stores the unsigned number entered (123456789).
+//       cin stores the unsigned number entered.
