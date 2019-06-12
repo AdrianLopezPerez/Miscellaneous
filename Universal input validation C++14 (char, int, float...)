@@ -16,15 +16,18 @@
 
 // USE
 // Everytime user input is required, follow these steps:
-// 1. Declare the variable.
+// 1. Declare the variable in which the input is to be stored.
 // 2. Declare an auto lambda function that returns true if conditions 
 //    are met, or make it return true if there are no conditions.
 // 3. Call input_validation(&variable, conditions, message).
-// Observe that, using this style, it takes at least t+l+n lines of code
+
+// PRACTICALITY
+// Observe that, using this style, it takes t+l+n lines of code
 // to get and validate user input, where t is the number of diferent types
 // of the variables, l is the number of different lambda functions, and 
-// n is the number of inputs. 
-
+// n is the number of inputs. t and l can be at most n, and at least 1. 
+// Hence, this style takes at least 2+n lines of code and, at most, 3n.
+// A header file with this function is just 16 lines.
 
 // EXAMPLE
 // double x;
