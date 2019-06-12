@@ -1,7 +1,9 @@
 // OBJECTIVE
 // This function demands user input and validates it. 
 // The aim is to make code within the body of our program
-// as clean as possible.
+// as clean as possible. Aimed to work with simple types  
+// such as char, std::string, int, float and double, including
+// signed and unsigned types.
 
 // ARGUMENTS
 // The first argument is the variable in which the input is
