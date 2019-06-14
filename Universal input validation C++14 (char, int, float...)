@@ -27,7 +27,6 @@
 // of the variables, l is the number of different lambda functions, and 
 // n is the number of inputs. t and l can be at most n, and at least 1. 
 // Hence, this style takes at least 2+n lines of code and, at most, 3n.
-// A header file with this function is just 16 lines.
 
 // EXAMPLE
 // double x;
