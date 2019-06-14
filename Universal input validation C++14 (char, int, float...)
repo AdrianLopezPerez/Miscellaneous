@@ -48,10 +48,10 @@ void input_validation(Type * input, UnaryPredicate conditions, std::string messa
         if (std::cin.fail() || std::cin.get() != '\n') { // If input is invalid (has another type than requested)
             std::cin.clear(); // Clean the flag of cin.fail
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Erase spurious chars
-            std::cout << " ERROR:Invalid input.\n\n"; 
+            throw " ERROR:Invalid input.\n\n"; 
         }
         else if (!conditions(*input)) { // If conditions for validity are not met
-            std::cout << " ERROR:Invalid value.\n\n";
+            throw " ERROR:Invalid value.\n\n";
         }
         else break;
     }
