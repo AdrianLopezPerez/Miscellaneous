@@ -42,7 +42,7 @@
 #include <limits>
 
 template<class TYPE, class LAMBDA> // Generic types (TYPE is a pointer and LAMBDA is a lambda function)
-void input_validation(TYPE input, LAMBDA conditions, std::string message) {
+void input_validation(TYPE * input, LAMBDA conditions, std::string message) {
     while (1) {
         std::cout << message; // Print a string (UI)
         std::cin >> *input;   // Asign user input to the value of the given pointer
