@@ -3,6 +3,16 @@
 // The aim is to make code within the body of our program
 // as clean as possible.
 
+// PRACTICALITY
+// Using the header file and this style, if n is the # of variables
+// which are to be obtained and validated, it takes at least 3n + 1
+// and at most 4n lines of code to validate them all.
+// A similar input and validation method would take between 
+// 14n + 1 and 15n. 
+// Therefore, the reduction in lines of code is in all cases around 75%.
+// I acknowledge that the lambda function as an argument is not aesthetic, 
+// but getting accustomed to this style is straightforward.
+
 // ARGUMENTS
 // 1. The first argument is a pointer to the variable in which 
 // the input is to be stored. 
@@ -26,14 +36,6 @@
 // input_validation(&x, 
 //          [](auto foo) { return foo != 0; }, 
 //          "Enter x: ");
-
-// PRACTICALITY
-// Using the header file and this style, if n is the # of variables
-// which are to be obtained and validated, it takes at least 3n + 1
-// and at most 4n lines of code to validate them all.
-// A similar input and validation method would take between 
-// 14n + 1 and 15n. 
-// The reduction in lines of code is around 75%.
 
 // CODE
 #ifndef __INPUT_VALIDATION_H // Header guards
