@@ -10,28 +10,30 @@
 //        auto conditions = [](auto foo) { return foo != 0; };
 // where foo != 0 is a sample statement.
 // If there are not particular conditions that must be met,
-// make the lambda function return true.
+// make the lambda function return true, just like
+//              [](auto foo) { return true; }
 // 3. The third argument is the string that contains the message
 // sent to the user, e.g. "Enter x: ".
 
 // USE
 // Everytime user input is required, follow these steps:
 // 1. Declare the variable in which the input is to be stored.
-// 2. Declare an auto lambda function that returns true if conditions 
-//    are met, or make it return true if there are no conditions.
-// 3. Call input_validation(&variable, conditions, message).
-
-// PRACTICALITY
-// Observe that, using this style, it takes t+l+n lines of code
-// to get and validate user input, where t is the number of diferent types
-// of the variables, l is the number of different lambda functions, and 
-// n is the number of inputs. t and l can be at most n, and at least 1. 
-// Hence, this style takes at least 2+n lines of code and, at most, 3n.
+//    Never declare the variable as a char. Use std::string instead.
+// 2. Call input_validation(&variable, [](auto foo) { return conditions; }, message).
 
 // EXAMPLE
 // double x;
-// auto x_validity = [](auto foo) { return foo != 0; };
-// input_validation(&x, x_validity, "Enter x: ");
+// input_validation(&x, 
+//          [](auto foo) { return foo != 0; }, 
+//          "Enter x: ");
+
+// PRACTICALITY
+// Using the header file and this style, if n is the # of variables
+// which are to be obtained and validated, it takes at least 3n + 1
+// and at most 4n lines of code to validate them all.
+// A similar input and validation method would take between 
+// 14n + 1 and 15n. 
+// The reduction in lines of code is around 75%.
 
 // CODE
 #ifndef __INPUT_VALIDATION_H // Header guards
@@ -40,19 +42,28 @@
 #include <iostream>
 #include <limits>
 
-template<typename Type, class UnaryPredicate> // Generic types (TYPE is a pointer and LAMBDA is a lambda function)
-void input_validation(Type * input, UnaryPredicate conditions, std::string message) {
+template<typename Type, class UnaryPredicate> 
+void input_validation(Type * input, 
+            UnaryPredicate conditions, 
+            std::string message) {
     while (1) {
-        std::cout << message; // Print a string (UI)
-        std::cin >> *input;   // Asign user input to the value of the given pointer
-        if (std::cin.fail() || std::cin.get() != '\n') { // If input is invalid (has another type than requested)
-            std::cin.clear(); // Clean the flag of cin.fail
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Erase spurious chars
-            std::cout << " ERROR:Invalid input.\n\n"; 
+        // Print a string in console asking for input
+        std::cout << message;
+        // Assign user input to the value of the given pointer
+        std::cin >> *input;
+        // If input is invalid (has another type than requested)
+        if (std::cin.fail() || std::cin.get() != '\n') {
+            // Clean the flag of cin.fail
+            std::cin.clear();
+            // Erase spurious chars from input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+            std::cout << " ERROR: Invalid input.\n\n"; 
         }
-        else if (!conditions(*input)) { // If conditions for validity are not met
-            std::cout << " ERROR:Invalid value.\n\n";
+        // If specified conditions for validity are not met
+        else if (!conditions(*input)) { 
+            std::cout << " ERROR: Invalid value.\n\n";
         }
+        // If input is valid and 
         else break;
     }
 }
